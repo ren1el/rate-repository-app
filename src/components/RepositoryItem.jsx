@@ -83,6 +83,7 @@ const RepositoryItem = ({ item }) => {
   const styles = {
     mainContainer: {
       padding: 20,
+      backgroundColor: theme.colors.white,
     },
     data: {
       display: 'flex',

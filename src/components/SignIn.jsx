@@ -3,17 +3,12 @@ import Text from './Text';
 import { Pressable, View, StyleSheet } from 'react-native';
 import FormikTextInput from './FormikTextInput';
 import { Formik } from 'formik';
+import theme from '../theme';
+import * as yup from 'yup';
 
 const SignIn = () => {
-  const styles = {
-    wrapper: {
-      padding: 10,
-    },
-  };
-
   return (
-    <View style={styles.wrapper}>
-      <Text style={styles.signIn}>The sign in view</Text>
+    <View>
       <Authentication />
     </View>
   );
@@ -21,26 +16,48 @@ const SignIn = () => {
 
 const Form = ({ onSubmit }) => {
   const styles = StyleSheet.create({
+    container: {
+      padding: 15,
+      backgroundColor: theme.colors.white,
+    },
     field: {
       borderWidth: 1,
       borderRadius: 5,
       padding: 20,
+      borderColor: '#aaa',
+    },
+    button: {
+      backgroundColor: theme.colors.primary,
+      display: 'flex',
+      alignItems: 'center',
+      padding: 20,
+      borderRadius: 5,
+    },
+    buttonText: {
+      color: theme.colors.white,
     }
   });
 
   return (
-    <>
-      <Text>Username</Text>
+    <View style={styles.container}>
       <FormikTextInput name='username' placeholder='Username' style={styles.field} />
-      <Text>Password</Text>
       <FormikTextInput name='password' placeholder='Password' secureTextEntry style={styles.field} />
-      <Pressable onPress={onSubmit}>
-        <Text>Sign In</Text>
+      <Pressable style={styles.button} onPress={onSubmit}>
+        <Text style={styles.buttonText}>Sign In</Text>
       </Pressable>
-    </>
+    </View>
   );
 };
 
+
+const validationSchema = yup.object().shape({
+  username: yup
+    .string()
+    .required('Username is required'),
+  password: yup
+    .string()
+    .required('Password is required')
+});
 
 const Authentication = () => {
   const initialValues = {
@@ -53,7 +70,11 @@ const Authentication = () => {
   };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit}>
+    <Formik 
+      initialValues={initialValues} 
+      onSubmit={onSubmit}
+      validationSchema={validationSchema}
+    >
       {({ handleSubmit }) => <Form onSubmit={handleSubmit} />}
     </Formik>
   );

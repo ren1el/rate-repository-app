@@ -7,16 +7,18 @@ import { Link } from 'react-router-native';
 
 const Tab = ({ label, path }) => {
   const styles = StyleSheet.create({
+    container: {
+      marginRight: 15,
+    },
     label: {
       color: 'white',
       fontWeight: 'bold',
       fontSize: theme.fontSizes.subheading,
-      marginRight: 15,
     }
   });
 
   return (
-    <Pressable>
+    <Pressable style={styles.container}>
       <Link to={path}>
         <Text style={styles.label}>
           {label}
