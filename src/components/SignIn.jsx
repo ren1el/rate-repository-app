@@ -6,6 +6,7 @@ import { Formik } from 'formik';
 import theme from '../theme';
 import * as yup from 'yup';
 import useSignIn from '../hooks/useSignIn';
+import { useHistory } from 'react-router-native';
 
 const SignIn = () => {
   return (
@@ -62,6 +63,7 @@ const validationSchema = yup.object().shape({
 
 const Authentication = () => {
   const [signIn] = useSignIn();
+  const history = useHistory();
 
   const initialValues = {
     username: '',
@@ -72,8 +74,8 @@ const Authentication = () => {
     const { username, password } = values;
 
     try {
-      const { data } = await signIn({ username, password });
-      console.log(data);
+      await signIn({ username, password });
+      history.push('/');
     } catch (error) {
       console.log(error);
     }
