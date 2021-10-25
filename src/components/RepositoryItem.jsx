@@ -42,14 +42,14 @@ const RepositoryInfo = ({ ownerAvatarUrl, fullName, description, language }) => 
   };
 
   return (
-      <View style={styles.descriptionContainer}>
-        <Image source={{ uri: ownerAvatarUrl }} style={styles.avatar} />
-        <View style={styles.summaryContainer}>
-          <Text style={styles.title}>{fullName}</Text>
-          <Text style={styles.description}>{description}</Text>
-          <Text style={styles.language}>{language}</Text>
-        </View>
+    <View style={styles.descriptionContainer} testID="repositoryItem">
+      <Image source={{ uri: ownerAvatarUrl }} style={styles.avatar} />
+      <View style={styles.summaryContainer}>
+        <Text style={styles.title}>{fullName}</Text>
+        <Text style={styles.description}>{description}</Text>
+        <Text style={styles.language}>{language}</Text>
       </View>
+    </View>
   );
 };
 
@@ -70,9 +70,9 @@ const DataSnippet = ({ label, count }) => {
       fontSize: theme.fontSizes.body
     },
   };
-  
+
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID="dataSnippet">
       <Text style={styles.count}>{count}</Text>
       <Text style={styles.label}>{label}</Text>
     </View>
@@ -94,8 +94,8 @@ const RepositoryItem = ({ item }) => {
 
   return (
     <View style={styles.mainContainer}>
-      <RepositoryInfo 
-        ownerAvatarUrl={item.ownerAvatarUrl} 
+      <RepositoryInfo
+        ownerAvatarUrl={item.ownerAvatarUrl}
         fullName={item.fullName}
         description={item.description}
         language={item.language}
