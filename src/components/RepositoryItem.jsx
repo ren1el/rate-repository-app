@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, Pressable } from 'react-native';
+import { useHistory } from 'react-router-native';
 import theme from '../theme';
+import * as Linking from 'expo-linking';
 
-const RepositoryInfo = ({ ownerAvatarUrl, fullName, description, language }) => {
+const RepositoryInfo = ({ id, ownerAvatarUrl, fullName, description, language }) => {
   const styles = {
     descriptionContainer: {
       display: 'flex',
@@ -41,15 +43,19 @@ const RepositoryInfo = ({ ownerAvatarUrl, fullName, description, language }) => 
     },
   };
 
+  const history = useHistory();
+
   return (
-    <View style={styles.descriptionContainer} testID="repositoryItem">
-      <Image source={{ uri: ownerAvatarUrl }} style={styles.avatar} />
-      <View style={styles.summaryContainer}>
-        <Text style={styles.title}>{fullName}</Text>
-        <Text style={styles.description}>{description}</Text>
-        <Text style={styles.language}>{language}</Text>
+    <Pressable onPress={() => {history.push(`repository/${id}`);}}>
+      <View style={styles.descriptionContainer} testID="repositoryItem">
+        <Image source={{ uri: ownerAvatarUrl }} style={styles.avatar} />
+        <View style={styles.summaryContainer}>
+          <Text style={styles.title}>{fullName}</Text>
+          <Text style={styles.description}>{description}</Text>
+          <Text style={styles.language}>{language}</Text>
+        </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
@@ -79,7 +85,7 @@ const DataSnippet = ({ label, count }) => {
   );
 };
 
-const RepositoryItem = ({ item }) => {
+const RepositoryItem = ({ item, showExternalButton }) => {
   const styles = {
     mainContainer: {
       padding: 20,
@@ -89,12 +95,30 @@ const RepositoryItem = ({ item }) => {
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'space-between'
+    },
+    openButton: {
+      backgroundColor: theme.colors.primary,
+      marginTop: 15,
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 20,
+      borderRadius: 10,
+    },
+    openButtonText: {
+      color: theme.colors.white,
+      fontWeight: 'bold',
+      fontSize: theme.fontSizes.body,
     }
+  };
+
+  const handlePress = () => {
+    Linking.openURL(item.url);
   };
 
   return (
     <View style={styles.mainContainer}>
       <RepositoryInfo
+        id={item.id}
         ownerAvatarUrl={item.ownerAvatarUrl}
         fullName={item.fullName}
         description={item.description}
@@ -106,6 +130,14 @@ const RepositoryItem = ({ item }) => {
         <DataSnippet label={<Text>Reviews</Text>} count={item.reviewCount} />
         <DataSnippet label={<Text>Rating</Text>} count={item.ratingAverage} />
       </View>
+      {showExternalButton && 
+        <Pressable onPress={handlePress}>
+          <View style={styles.openButton}>
+            <Text style={styles.openButtonText}>
+              Open in GitHub
+            </Text>
+          </View>
+        </Pressable>}
     </View>
   );
 };
