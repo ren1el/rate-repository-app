@@ -70,10 +70,14 @@ const Repository = () => {
   const params = useParams();
   const id = params.id;
 
-  const { repository } = useRepository(id);
+  const { repository, fetchMore } = useRepository(id, 4);
   const reviewNodes = repository.reviews ? repository.reviews.edges.map(edge => edge.node) : [];
 
   const renderItem = ({ item }) => <ReviewItem id={item.id} review={item} />;
+
+  const onEndReach = () => {
+    fetchMore();
+  };
 
   return (
     <View style={{ flex: 1 }}>
@@ -84,6 +88,7 @@ const Repository = () => {
         ItemSeparatorComponent={ItemSeparator}
         renderItem={renderItem}
         style={{ flex: 1 }}
+        onEndReached={onEndReach}
       />
     </View>
   );
