@@ -78,6 +78,7 @@ export const GET_CURRENT_USER = gql`
             id
             text
             repository {
+              id
               ownerName
               name
             }

@@ -1,6 +1,8 @@
 import React from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import { useHistory } from 'react-router-native';
 import useCurrentUser from '../hooks/useCurrentUser';
+import useDeleteReview from '../hooks/useDeleteReview';
 import theme from '../theme';
 
 const ReviewItem = ({ review }) => {
@@ -36,8 +38,43 @@ const ReviewItem = ({ review }) => {
     },
     username: {
       fontWeight: 'bold',
+    },
+    reviewText: {
+      marginBottom: 5,
+    },
+    buttonContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
+    button: {
+      padding: 10,
+      flex: 1,
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      color: theme.colors.white,
+      borderRadius: 5,
+    },
+    viewRepoButton: {
+      backgroundColor: theme.colors.primary,
+      marginRight: 10,
+    },
+    deleteReviewButton: {
+      backgroundColor: theme.colors.error,
     }
   });
+
+  const [deleteReview] = useDeleteReview();
+  const history = useHistory();
+
+  const handleDelete = async () => {
+    try {
+      await deleteReview(review.id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -47,7 +84,15 @@ const ReviewItem = ({ review }) => {
       <View style={styles.reviewInfo}>
         <Text style={styles.username}>{review.repository.ownerName}/{review.repository.name}</Text>
         <Text style={styles.reviewDateText}>{new Date(review.createdAt).toString()}</Text>
-        <Text>{review.text}</Text>
+        <Text style={styles.reviewText}>{review.text}</Text>
+        <View style={styles.buttonContainer}>
+          <Pressable style={[styles.button, styles.viewRepoButton]} onPress={() => {history.push(`/repository/${review.repository.id}`);}}>
+            <Text style={{ color: theme.colors.white }}>View Repository</Text>
+          </Pressable>
+          <Pressable style={[styles.button, styles.deleteReviewButton]} onPress={handleDelete}>
+            <Text style={{ color: theme.colors.white }}>Delete Review</Text>
+          </Pressable>
+        </View>
       </View>
     </View>
   );
