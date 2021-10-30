@@ -1,7 +1,7 @@
 import { GET_REPOSITORIES } from '../graphql/queries';
 import { useQuery } from '@apollo/client';
 
-const useRepositories = (options, searchQuery) => {
+const useRepositories = (options, searchQuery, first) => {
   const latestOption = { orderBy: 'CREATED_AT', orderDirection: 'DESC' };
   const highestRatedOption = { orderBy: 'RATING_AVERAGE', orderDirection: 'DESC' };
   const lowestRatedOption = { orderBy: 'RATING_AVERAGE', orderDirection: 'ASC' };
@@ -25,16 +25,40 @@ const useRepositories = (options, searchQuery) => {
   }
 
   let searchKeyword = {};
+
   if (searchQuery) {
     searchKeyword = { searchKeyword: searchQuery };
   }
 
-  const { data, error, loading } = useQuery(GET_REPOSITORIES, {
+  const { data, error, loading, fetchMore, ...result } = useQuery(GET_REPOSITORIES, {
       fetchPolicy: 'cache-and-network',
-      variables: { ...option, ...searchKeyword },
+      variables: { ...option, ...searchKeyword, first },
   });
 
-  return { repositories: data ? data.repositories : undefined, loading, error };
+  const handleFetchMore = () => {
+    const canFetchMore = !loading && data?.repositories.pageInfo.hasNextPage;
+
+    if (!canFetchMore) {
+      return;
+    }
+
+    fetchMore({
+      variables: {
+        after: data.repositories.pageInfo.endCursor,
+        ...option,
+        ...searchKeyword,
+        ...first,
+      },
+    });
+  };
+
+  return {
+    repositories: data?.repositories,
+    fetchMore: handleFetchMore,
+    error,
+    loading,
+    ...result,
+  };
 };
 
 export default useRepositories;
