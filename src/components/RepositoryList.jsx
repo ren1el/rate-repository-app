@@ -1,5 +1,5 @@
-import React from 'react';
-import { FlatList, View, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { FlatList, View, StyleSheet, Picker } from 'react-native';
 import theme from '../theme';
 import RepositoryItem from './RepositoryItem';
 import useRepositories from '../hooks/useRepositories';
@@ -30,14 +30,30 @@ export const RepositoryListContainer = ({ repositories }) => {
       data={repositoryNodes}
       ItemSeparatorComponent={ItemSeparator}
       renderItem={renderItem}
+      style={{ flex: 1 }}
     />
   );
 };
 
 const RepositoryList = () => {
-  const { repositories } = useRepositories();
+  const [orderOptions, setOrderOptions] = useState('latest');
+  const { repositories } = useRepositories(orderOptions);
 
-  return <RepositoryListContainer repositories={repositories} />;
+  return (
+    <View style={{ flex: 1 }}>
+      <Picker
+        selectedValue={orderOptions}
+        onValueChange={(itemValue) => {
+          setOrderOptions(itemValue);
+        }}
+      >
+        <Picker.Item label="Latest Repositories" value='latest' />
+        <Picker.Item label="Highest Rated Repositories" value='highestRated' />
+        <Picker.Item label="Lowest Rated Repositories" value='lowestRated' />
+      </Picker>
+      <RepositoryListContainer repositories={repositories} />
+    </View>
+  );
 };
 
 export default RepositoryList;
