@@ -80,6 +80,7 @@ const AppBar = () => {
       <ScrollView horizontal>
         <Tab label={'Repositories'} path={'/'} />
         {user && <Tab label={'Create a Review'} path={'/create'} />}
+        {user && <Tab label={'My Reviews'} path={'/my-reviews'} />}
         {!user && <Tab label={'Sign In'} path={'/sign-in'} />}
         {!user && <Tab label={'Sign Up'} path={'/sign-up'} />}
         {user && <SignOutTab />}
