@@ -59,7 +59,7 @@ const Form = ({ onSubmit }) => {
     buttonText: {
       color: theme.colors.white,
       fontWeight: 'bold',
-    }
+    },
   });
 
   return (

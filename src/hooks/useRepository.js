@@ -19,7 +19,7 @@ const useRepository = (id, first) => {
         after: data.repository.reviews.pageInfo.endCursor,
         id,
         first,
-      }
+      },
     });
   };
 

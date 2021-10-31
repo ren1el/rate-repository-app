@@ -12,8 +12,8 @@ const useCreateUser = () => {
       variables: {
         user: {
           username,
-          password
-        }
+          password,
+        },
       },
     });
 

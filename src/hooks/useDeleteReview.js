@@ -8,8 +8,8 @@ const useDeleteReview = () => {
   const deleteReview = async (id) => {
     const { data } = await mutate({
       variables: {
-        id
-      }
+        id,
+      },
     });
 
     apolloClient.resetStore();

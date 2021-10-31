@@ -38,7 +38,7 @@ const ReviewItem = ({ review }) => {
     },
     username: {
       fontWeight: 'bold',
-    }
+    },
   });
 
   return (

@@ -28,7 +28,7 @@ const FormContainer = ({ onSubmit }) => {
       .max(100)
       .required('Rating is required'),
     review: yup
-      .string()
+      .string(),
   });
 
   return (
@@ -64,7 +64,7 @@ const Form = ({ onSubmit }) => {
     buttonText: {
       color: theme.colors.white,
       fontWeight: 'bold',
-    }
+    },
   });
 
   return (

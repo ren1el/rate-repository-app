@@ -62,7 +62,7 @@ const ReviewItem = ({ review }) => {
     },
     deleteReviewButton: {
       backgroundColor: theme.colors.error,
-    }
+    },
   });
 
   const [deleteReview] = useDeleteReview();

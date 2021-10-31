@@ -17,7 +17,7 @@ const Tab = ({ label, path }) => {
       color: 'white',
       fontWeight: 'bold',
       fontSize: theme.fontSizes.subheading,
-    }
+    },
   });
 
   return (
@@ -48,7 +48,7 @@ const SignOutTab = () => {
       color: 'white',
       fontWeight: 'bold',
       fontSize: theme.fontSizes.subheading,
-    }
+    },
   });
 
   return (

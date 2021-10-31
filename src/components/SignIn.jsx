@@ -37,7 +37,7 @@ const Form = ({ onSubmit }) => {
     },
     buttonText: {
       color: theme.colors.white,
-    }
+    },
   });
 
   return (
@@ -58,7 +58,7 @@ const validationSchema = yup.object().shape({
     .required('Username is required'),
   password: yup
     .string()
-    .required('Password is required')
+    .required('Password is required'),
 });
 
 export const AuthenticationContainer = ({ initialValues, onSubmit }) => {

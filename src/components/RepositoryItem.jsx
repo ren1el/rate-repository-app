@@ -70,10 +70,10 @@ const DataSnippet = ({ label, count }) => {
     },
     count: {
       fontWeight: 'bold',
-      fontSize: theme.fontSizes.body
+      fontSize: theme.fontSizes.body,
     },
     label: {
-      fontSize: theme.fontSizes.body
+      fontSize: theme.fontSizes.body,
     },
   };
 
@@ -94,7 +94,7 @@ const RepositoryItem = ({ item, showExternalButton }) => {
     data: {
       display: 'flex',
       flexDirection: 'row',
-      justifyContent: 'space-between'
+      justifyContent: 'space-between',
     },
     openButton: {
       backgroundColor: theme.colors.primary,
@@ -108,7 +108,7 @@ const RepositoryItem = ({ item, showExternalButton }) => {
       color: theme.colors.white,
       fontWeight: 'bold',
       fontSize: theme.fontSizes.body,
-    }
+    },
   };
 
   const handlePress = () => {

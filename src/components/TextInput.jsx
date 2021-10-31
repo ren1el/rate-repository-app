@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   error: {
     borderWidth: 1,
     borderColor: theme.colors.error,
-  }
+  },
 });
 
 const TextInput = ({ style, error, ...props }) => {
