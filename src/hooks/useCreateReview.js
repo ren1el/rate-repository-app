@@ -8,8 +8,8 @@ const useCreateReview = () => {
   const createReview = async (createReviewInput) => {
     const { ownerName, rating, repoName, review } = createReviewInput;
 
-    const { data } = await mutate({ 
-      variables: { 
+    const { data } = await mutate({
+      variables: {
         review: {
           repositoryName: repoName,
           ownerName,

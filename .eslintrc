@@ -25,6 +25,7 @@
       {
         "avoidEscape": true
       }
-    ]
+    ],
+    "no-trailing-spaces": "error"
   }
 }

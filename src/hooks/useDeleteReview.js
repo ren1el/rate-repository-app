@@ -6,12 +6,12 @@ const useDeleteReview = () => {
   const apolloClient = useApolloClient();
 
   const deleteReview = async (id) => {
-    const { data } = await mutate({ 
-      variables: { 
+    const { data } = await mutate({
+      variables: {
         id
       }
     });
-    
+
     apolloClient.resetStore();
     return data;
   };

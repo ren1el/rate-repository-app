@@ -114,7 +114,7 @@ const MyReviews = () => {
   };
 
   const renderItem = ({ item }) => <ReviewItem id={item.id} review={item} />;
-  
+
   return (
     <View>
       <FlatList

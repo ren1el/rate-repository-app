@@ -24,7 +24,7 @@ const useRepository = (id, first) => {
   };
 
   return {
-    repository: data ? data.repository : {}, 
+    repository: data ? data.repository : {},
     error,
     loading,
     fetchMore: handleFetchMore,

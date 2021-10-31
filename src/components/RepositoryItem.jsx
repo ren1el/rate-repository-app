@@ -130,7 +130,7 @@ const RepositoryItem = ({ item, showExternalButton }) => {
         <DataSnippet label={<Text>Reviews</Text>} count={item.reviewCount} />
         <DataSnippet label={<Text>Rating</Text>} count={item.ratingAverage} />
       </View>
-      {showExternalButton && 
+      {showExternalButton &&
         <Pressable onPress={handlePress}>
           <View style={styles.openButton}>
             <Text style={styles.openButtonText}>

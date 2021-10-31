@@ -74,20 +74,20 @@ const Form = ({ onSubmit }) => {
         placeholder='Repository owner name'
         style={styles.field}
         testID="ownerNameField" />
-      <FormikTextInput 
+      <FormikTextInput
         name='repoName'
         placeholder='Repository name'
         style={styles.field}
         testID="repoNameField" />
-      <FormikTextInput 
-        name='rating' 
-        placeholder='Rating between 0 and 100' 
-        style={styles.field} 
+      <FormikTextInput
+        name='rating'
+        placeholder='Rating between 0 and 100'
+        style={styles.field}
         testID="ratingField" />
       <FormikTextInput
-        name='review' 
-        placeholder='Review' 
-        style={styles.field} 
+        name='review'
+        placeholder='Review'
+        style={styles.field}
         testID="reviewField" />
       <Pressable style={styles.button} onPress={onSubmit} testID="submitButton">
         <Text style={styles.buttonText}>Create a Review</Text>
@@ -99,7 +99,7 @@ const Form = ({ onSubmit }) => {
 const CreateReview = () => {
   const [createReview] = useCreateReview();
   const history = useHistory();
-  
+
   const onSubmit = async (values) => {
     try {
       const id = await createReview(values);

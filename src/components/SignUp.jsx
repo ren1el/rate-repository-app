@@ -69,17 +69,17 @@ const Form = ({ onSubmit }) => {
         placeholder='Username'
         style={styles.field}
         testID="username" />
-      <FormikTextInput 
+      <FormikTextInput
         name='password'
         placeholder='Password'
         style={styles.field}
-        testID="password" 
+        testID="password"
         secureTextEntry />
-      <FormikTextInput 
-        name='passwordConfirm' 
-        placeholder='Password confirmation' 
-        style={styles.field} 
-        testID="passwordConfirm" 
+      <FormikTextInput
+        name='passwordConfirm'
+        placeholder='Password confirmation'
+        style={styles.field}
+        testID="passwordConfirm"
         secureTextEntry />
       <Pressable style={styles.button} onPress={onSubmit} testID="submitButton">
         <Text style={styles.buttonText}>Sign up</Text>
@@ -91,7 +91,7 @@ const Form = ({ onSubmit }) => {
 const SignUp = () => {
   const [signUp] = useCreateUser();
   const history = useHistory();
-  
+
   const onSubmit = async (values) => {
     try {
       await signUp(values);
